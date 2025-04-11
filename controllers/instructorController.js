@@ -10,3 +10,10 @@ exports.getInstructors = async (req, res) => {
   const instructors = await Instructor.find();
   res.json(instructors);
 };
+exports.getInstructorByEmail = async (req, res) => {
+  const instructor = await Instructor.findOne({ email: req.params.email });
+  if (!instructor) {
+    return res.status(404).json({ message: "Instructor not found" });
+  }
+  res.json(instructor);
+};
